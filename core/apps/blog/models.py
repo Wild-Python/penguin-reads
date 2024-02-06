@@ -2,7 +2,6 @@ from django.db import models
 from django.utils import timezone
 from django.urls import reverse
 from django.conf import settings
-from ckeditor.fields import RichTextField
 
 
 def user_directory_path(instance, filename):
@@ -37,7 +36,7 @@ class Post(models.Model):
     slug = models.SlugField(max_length=250, unique_for_date='publish_date')
     publish_date = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='blog_posts')
-    content = RichTextField(blank=True, null=True)
+    content = models.TextField(blank=True, null=True)
     status = models.CharField(max_length=10, choices=options, default='draft')
     favourites = models.ManyToManyField(
         settings.AUTH_USER_MODEL, related_name='favourites', default=None, blank=True)
