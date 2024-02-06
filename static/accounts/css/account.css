@@ -1,0 +1,20 @@
+@font-face {
+    font-family: 'Montreal';
+    src: url('/home/light/Desktop/tux-library/static/fonts/Neue Montreal.otf') format('opentype');
+}
+
+/* Apply the font to your desired class or element */
+.font-montreal {
+  font-family: 'Montreal', serif;
+}
+
+
+.account-form input {
+  border: 2px solid #ccc;
+  height: calc(2em + .75rem + 2px);
+}
+
+.account-form input:focus {
+  border-color: #1497ff;
+  box-shadow: none;
+}
