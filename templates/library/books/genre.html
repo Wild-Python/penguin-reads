@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}
+{% if genre %}{{ genre.name }}{% else %}Books{% endif %}
+{% endblock %}
+{% block content %}
+
+    <div class="page-title">
+      <div class="container w-container">
+        <div class="section-title-wrap">
+          <h1 class="page-heading">{{genre.name|title}}</h1>
+          <p class="title-info">
+            Discover empowering stories and exercises that inspire positive
+            change. Unlock your potential and create a life you love with
+            self-help books.
+          </p>
+        </div>
+        {% if not books %}
+            <div class="col-12">There are currently no book available.
+                <a href="{% url 'library:books_home' %}">Home</a>
+            </div>
+        {% endif %}
+      </div>
+      <div class="triangle-small"></div>
+    </div>
+    <section class="product-list">
+        <div class="w-layout-blockcontainer container w-container">
+          <div class="product-wrap">
+            <div class="w-dyn-list">
+              <div role="list" class="book-list w-dyn-items">
+                {% for book in books %}
+                    <div role="listitem" class="book-item w-dyn-item">
+                      <a href="{{ book.get_absolute_url }}" class="book-link w-inline-block">
+                          <div class="book-image">
+                              <img loading="lazy"
+                                src="{{ book.image.url }}" alt="Book"
+                                class="book-img"/>
+                          </div>
+                        <div class="book-data">
+                          <h4 class="book-name">{{ book.title }}</h4>
+                          <div class="price">
+                            $7.00USD
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+    <br>
+{% endblock %}

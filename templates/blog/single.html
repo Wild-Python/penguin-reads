@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{post.title}}{% endblock %}
+{% block content %}
+
+    <div class="page-title">
+      <div class="container w-container">
+
+        <div class="blog-hero">
+
+          <div class="blog-detail">
+
+            <div class="sub-heading">Discover Inspiration</div>
+            <h1 class="blog-main-title">
+                {{ post.title }}
+            </h1>
+            <div>{{ post.publish_date }}</div>
+          </div>
+          <div class="blog-main-img">
+            <img loading="eager" src="{{ post.image.url }}" alt="{{ post.title }}"/>
+          </div>
+
+        </div>
+          <br>
+          {% if user.is_authenticated %}
+              {% if fav %}
+                  <div class="sub-heading">
+                        <a href="{% url 'blog:favorites_list' %}" style="text-decoration: none;">
+                            Remove favorite
+                        </a>
+                  </div>
+              {% else %}
+                  <div class="sub-heading">
+                        <a href="{% url 'blog:add_to_favorites' post.id %}" style="text-decoration: none;">
+                            Add to favorite
+                        </a>
+                  </div>
+              {% endif %}
+          {% else %}
+
+              <div class="sub-heading">
+                    <a href="{% url 'users:signup' %}" style="text-decoration: none;">
+                        Add to favorite
+                    </a>
+              </div>
+
+          {% endif %}
+
+      </div>
+      <div class="triangle-small"></div>
+    </div>
+    <div class="page-wrapper">
+      <div class="blog-overview">
+        <div class="w-layout-blockcontainer container w-container">
+          <div class="blog-data-wrap">
+            <div class="blog-details w-richtext">
+                <div class="col-12"><p>{{post.content|safe}}</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+{#      <section class="similar-blog">#}
+{#        <div class="w-layout-blockcontainer container w-container">#}
+{#          <div class="section-title"><h2 class="title">Similar Posts</h2></div>#}
+{#          <div class="w-dyn-list">#}
+{#            <div role="list" class="similar-blog-list w-dyn-items">#}
+{#              <div role="listitem" class="similar-blog-item w-dyn-item">#}
+{#                <a class="similar-blog-link w-inline-block">#}
+{#                    <div class="ab-image">#}
+{#                    <img#}
+{#                      alt=""#}
+{#                      loading="lazy"#}
+{#                      src="https://assets-global.website-files.com/64b787e06a1ea8dedc36b707/64b78cdfd61b23874760a141_blog-thumb-05.jpg"#}
+{#                      class="similar-blog-img"#}
+{#                    />#}
+{#                  </div>#}
+{#                  <div class="sb-data">#}
+{#                    <div>July 20, 2023</div>#}
+{#                    <h3 class="similar-blog-title">#}
+{#                      Books for Personal Growth and Self-Discovery#}
+{#                    </h3>#}
+{#                  </div>#}
+{#                </a>#}
+{#              </div>#}
+{#            </div>#}
+{#          </div>#}
+{#        </div>#}
+{#      </section>#}
+
+    </div>
+{% endblock %}

@@ -1,0 +1,7 @@
+{% autoescape off %}
+    Please click on the link below to confirm your registration:<br/><br/>
+    <a href="http://{{domain}}{% url 'users:activate' uid=uid token=token %}">
+      Activate account
+</a>
+<br/><br/>
+Regards, {% endautoescape %}

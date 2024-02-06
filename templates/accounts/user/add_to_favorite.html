@@ -1,0 +1,57 @@
+{% extends "accounts/sub_base.html" %}
+{% block title %}
+    Users Favorite List
+{% endblock %}
+
+{% block sub_content %}
+
+<div class="col-12 mx-auto">
+  <h1 class="h3">Favorites</h1>
+  <div>Manage your Favorites</div>
+    <div>
+        {% if messages %}
+            <div class="alert alert-warning mt-2" alert-{{ message.tags }}" role="alert">
+            {% for message in messages  %}
+              {{message|safe}}
+            {% endfor %}
+        {% endif %}
+    </div>
+    <hr/>
+
+  {% if favorite %}
+      {% for book in favorite %}
+          <div class="card mb-3 rounded-0">
+            <div class="row g-0">
+              <div class="col-md-2">
+                {% if book.image %}
+                    <img
+                      class="img-fluid d-block p-2"
+                      width="135px"
+                      src="{{ book.image.url }}"
+                      alt=""
+                    />
+                {% endif %}
+              </div>
+              <div class="col-md-10">
+                <div class="card-body">
+                    
+                    <a href="{% url 'library:book_detail' book.slug %}">
+                        <h5 class="card-title">{{book.title}}</h5>
+                        <p class="card-text">{{book.description|truncatechars:80}}</p>
+                        <p class="card-text">
+                            <small class="text-muted">{{ book.author }}</small>
+                        </p>
+                    </a>
+                      <a type="button" class="sub-heading mt-3" style="text-decoration: none;" href="{% url 'users:add_to_favorite' book.id %}">
+                          Remove the gem
+                      </a>
+                </div>
+              </div>
+            </div>
+          </div>
+      {% endfor %}
+  {% else %}
+    <p class="card-text">No book have been added to your favorite yet</p>
+  {% endif %}
+</div>
+{% endblock %}

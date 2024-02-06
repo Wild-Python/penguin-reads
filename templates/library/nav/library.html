@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Books{% endblock %}
+{% block content %}
+    
+    <div class="page-title">
+      <div class="container w-container">
+        <div class="section-title-wrap">
+          <h1 class="page-heading">Our Book Collection</h1>
+          <p class="title-info">
+            Explore different collection and discover new perspectives,
+            knowledge, and inspiration.
+          </p>
+        </div>
+      </div>
+      <div class="triangle-small"></div>
+    </div>
+    
+    <br>
+    
+    <section class="popular-books">
+        <div class="w-layout-blockcontainer container w-container">
+            <div class="book-list w-dyn-list">
+              {% for book in books %}
+                <div role="listitem" class="book-item w-dyn-item">
+                  <a href="{{ book.get_absolute_url }}" class="book-link w-inline-block">
+                    <div class="book-image">
+                      <img src="{{ book.image.url }}" class="book-img" alt="{{ book.title }}"/>
+                    </div>
+                    <div class="book-data">
+                      <h4 class="book-name">{{ book.title }}</h4>
+                      <div class="price">
+                        ${{ book.price }}USD
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              {% endfor %}
+            </div>
+
+{#            <div class="right-btn-wrap">#}
+{#              <a href="" class="primary-btn w-inline-block">#}
+{#                <div>Next Page</div>#}
+{#                <img src="{% static 'images/black-arrow.svg' %}" loading="eager" alt="Arrow" class="default-btn-arrow"/>#}
+{#                <img src="{% static 'images/white-arrow.svg' %}" loading="eager" alt="Arrow" class="hover-btn-arrow"/>#}
+{#              </a>#}
+{#            </div>#}
+        </div>
+    </section>
+    
+    <br>
+     
+
+{% endblock %}

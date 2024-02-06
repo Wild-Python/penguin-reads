@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+{% if book %}{{ book.title }}{% else %}Book{% endif %}
+{% endblock %}
+{% block content %}
+
+
+{#    <div class="container" style="max-width: 1000px">#}
+{#        {% if messages %}#}
+{#            <div class="alert alert-warning" alert-{{ message.tags }}" role="alert">#}
+{#            {% for message in messages  %}#}
+{#              {{message|safe}} - <a href="{% url "users:favorite" %}" class="alert-link">Your Gems</a>.#}
+{#            {% endfor %}#}
+{#    </div>#}
+{##}
+{#    {% endif %}#}
+    
+    <div class="row g-3">
+        <div class="page-wrapper">
+            <section class="product-section">
+              <div class="w-layout-blockcontainer container w-container">
+                <div class="product-wrapper">
+                  <div class="main-book-wrap">
+                      <img alt="Book Image" loading="eager" src="{{ book.image.url }}" class="book-main-img" />
+                  </div>
+                  <div class="main-book-data">
+                    <div class="book-details">
+                      <h2 class="main-book-title">{{ book.title }}</h2>
+                        
+                      <div class="author">
+                        <div>-</div>
+                        <div>{{ book.author }}</div>
+                      </div>
+                        
+                      <p class="product-info">Steve Jobs is the authorized self-titled biography of American business magnate
+                        and Apple co-founder Steve Jobs. The book was written at the request of Jobs by Walter Isaacson.</p>
+                      <div class="book-price">
+                        <h3 class="main-price">$10.37 USD</h3>
+        {#                <h3 class="old-price">$14.00 USD</h3>#}
+                      </div>
+                    </div>
+                     <div class="cart-btn-wrap">    
+                          {% if user.is_authenticated %}
+                              
+                              {% if fav %}
+                                  <a href="{% url "users:favorite" %}" class="favorite-btn" role="button" aria-disabled="true">
+                                    Remove Favorite
+                                  </a>
+                              {% else %}
+                                  <a href="{% url "users:add_to_favorite" book.id  %}" class="favorite-btn" role="button" aria-disabled="true">
+                                    Add to Favorite
+                                  </a>
+                              {% endif %}    
+                              
+                          {% else %} 
+                              <a href="{% url "users:login" %}" class="favorite-btn" role="button" aria-disabled="true">
+                                Add to Favorite
+                              </a>
+                          {% endif %}
+                            <a href="{{ book.pdf_file.url }}" target="_blank" class="read-btn">
+                                Read
+                            </a>
+                     </div>
+        
+                      
+                    <div class="main-book-info">
+                      <div class="info">
+                        <div>Author:</div>
+                        <div>{{ book.author }}</div>
+                      </div>
+                      <div class="info">
+                        <div>Category:</div>
+                        <div class="w-dyn-list">
+                          <div role="list" class="w-dyn-items">
+                            <div role="listitem" class="w-dyn-item">
+                              <a href="" class="category-link">
+                                  {{ book.book_genre }}
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="info">
+                        <div>Length:</div>
+                        <div> 656 </div>
+                      </div>
+                      <div class="info">
+                        <div>Published:</div>
+                        <div>24 October 2011</div>
+                      </div>
+                      <div class="info">
+                        <div>ISBN:</div>
+                        <div>1-4516-4853-7</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+    
+            <section class="product-details">
+              <div class="w-layout-blockcontainer container w-container">
+                <div>
+                  <h3 class="details-title">Description</h3>
+                  <div class="w-richtext">
+                    <p>{{ book.description }}</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+      </div>
+    </div>
+
+    
+    
+    
+{% endblock %}

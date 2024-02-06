@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Blog{% endblock %}
+{% block content %}
+
+    <div class="page-title">
+      <div class="container w-container">
+        <div class="section-title-wrap">
+          <h1 class="page-heading">Our Blogs</h1>
+          <p class="title-info">
+            In a world that can sometimes feel overwhelming and challenging,
+            positive thinking offers a ray of hope and a path to a brighter
+            future.
+          </p>
+        </div>
+      </div>
+      <div class="triangle-small"></div>
+    </div>
+
+    <div class="page-wrapper">
+      <section class="blog-section">
+        <div class="w-layout-blockcontainer container w-container">
+          <div class="w-dyn-list">
+            <div role="list" class="blog-list-collection w-dyn-items">
+                {% for post in posts %}
+                  <div role="listitem" class="blog-item w-dyn-item">
+                    <a class="blog-link w-inline-block" href="{{ post.get_absolute_url }}">
+                        <div class="blog-img-wrap">
+                            <img alt="" loading="lazy" src="{{ post.image.url }}"/>
+                        </div>
+                      <div class="blog-data">
+                        <div class="blog-text-data">
+                          <div class="blog-date">{{ post.publish }}</div>
+                          <h2 class="blog-title-text">
+                              {{ post.title }}
+                          </h2>
+                          <p class="blog-info">
+                            {{ post.excerpt }}
+                          </p>
+                        </div>
+                        <div class="link-wrap">
+                          <div class="read-more">
+                            <div>Read More</div>
+                            <img src="{% static 'images/black-arrow.svg' %}" loading="lazy" alt="Arrow" class="link-arrow"/>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                    <div class="blog-divider"></div>
+                {% endfor %}
+                  </div>
+
+            <div role="navigation" aria-label="List" class="w-pagination-wrapper pagination">
+              <a aria-label="Next Page" class="w-pagination-next primary-btn next">
+                  <div class="w-inline-block">Next</div>
+                <img src="{% static 'images/black-arrow.svg' %}" loading="eager" alt="Arrow" class="default-btn-arrow" />
+                <img src="{% static 'images/white-arrow.svg' %}" loading="eager" alt="Arrow" class="hover-btn-arrow" />
+              </a>
+                <link rel="prerender" href="" />
+            </div>
+          </div>
+        </div>
+        </div>
+      </section>
+    </div>
+    <br>
+{% endblock %}        
