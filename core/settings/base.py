@@ -32,7 +32,6 @@ INSTALLED_APPS = [
     'core.apps.users',
     'core.apps.library',
     'core.apps.blog',
-    'ckeditor',
 
     # tailwindcss
     'tailwind',
