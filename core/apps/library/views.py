@@ -1,32 +1,52 @@
-from django.shortcuts import get_object_or_404, render
-
-from django.views import View
 from .models import Genre, Book
+from django.shortcuts import get_object_or_404
+from django.views.generic import TemplateView, DetailView, ListView
 
 
-class AllBooksView(View):
-    def get(self, request):
-        books = Book.books.all()
-        return render(request, 'library/index.html', {'books': books})
+class LibraryView(TemplateView):
+    template_name = 'library/index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['books'] = Book.books.all()
+        return context
 
 
-class GenreBookListView(View):
-    def get(self, request, genre_slug=None):
-        genre = get_object_or_404(Genre, slug=genre_slug)
-        books = Book.books.filter(book_genre=genre)
-        return render(request, 'library/books/genre.html', {'genre': genre, 'books': books})
+class LibraryGenreListView(ListView):
+    template_name = 'library/books/genre.html'
+    context_object_name = 'books'
+
+    def get_queryset(self):
+        genre = get_object_or_404(Genre, slug=self.kwargs['genre_slug'])
+        return Book.books.filter(book_genre=genre)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['genre'] = get_object_or_404(Genre, slug=self.kwargs['genre_slug'])
+        return context
 
 
-class BookDetailView(View):
-    def get(self, request, slug):
-        book = get_object_or_404(Book, slug=slug)
-        fav = bool
-        if book.favorites.filter(id=request.user.id).exists():
+class BookDetailView(DetailView):
+    model = Book
+    template_name = 'library/books/single.html'
+    context_object_name = 'book'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        book = self.object
+        fav = False
+        if book.favorites.filter(id=self.request.user.id).exists():
             fav = True
-        return render(request, 'library/books/single.html', {'book': book, 'fav': fav})
+
+        context['fav'] = fav
+        return context
 
 
 # Navbar Area
-def library(request):
-    books = Book.books.all()
-    return render(request, 'library/nav/library.html', {'books': books})
+class Library(TemplateView):
+    template_name = 'library/nav/library.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['books'] = Book.books.all()
+        return context
