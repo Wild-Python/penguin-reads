@@ -105,7 +105,9 @@ class UserEditForm(forms.ModelForm):
 
 class PasswdResetForm(PasswordResetForm):
     email = forms.EmailField(max_length=254, widget=forms.TextInput(
-        attrs={'class': 'form-control mb-3', 'placeholder': 'Email', 'id': 'form-email'}))
+        attrs={'class': 'col-span-4 border-2 border-gray-300 py-2 px-1 text-gray-600 outline-none',
+               'placeholder': 'your@email.com', 'id': 'form-email', 'type': 'email'}
+    ))
 
     def clean_email(self):
         email = self.cleaned_data['email']
