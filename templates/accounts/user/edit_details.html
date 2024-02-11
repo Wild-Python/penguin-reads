@@ -2,33 +2,38 @@
 {% block title %}Edit Profile{% endblock %}
 {% block sub_content %}
 
+    
 <form class="account-form" method="post" enctype="multipart/form-data">
     {% if user_form.is_valid and profile_form.is_valid %}
-    <div class="alert alert-primary" role="alert">
-        Details successfully updated!
-    </div>
-    <p class="small text-center pt-0">
-        <a href="{% url "users:accounts-settings" %}">Back to Account Settings</a>
-    </p>
-    {%else%}
-    <h3>Change your username</h3>
-    <p>You can edit your account using the following form:</p>
-    {% endif %}
-    {% if form.errors %}
-    <div class="alert alert-primary" role="alert">
-        Error: Please try again!
-    </div>
-    {% endif %}
-    {% csrf_token %}
-    {{ user_form.email.label }}
-    {{ user_form.email }}
+        <div class="alert alert-success" role="alert">
+            Details successfully updated!
+        </div>
+        <p class="small text-center pt-0">
+            <a href="{% url "users:accounts-settings" %}">Back to Account Settings</a>
+        </p>
+    {% else %}
+        {% if form.errors %}
+            <div class="alert alert-danger" role="alert">
+                Error: Please try again!
+            </div>
+        {% endif %}
 
-    {{ user_form.username.label }}
-    {{ user_form.username }}
+        <h3>Change your username</h3>
+        <p>You can edit your account using the following form:</p>
 
-    <button class="btn btn-primary btn-block py-2 mb-4 mt-5 fw-bold w-100" type="submit" value="Save changes">Save
-        Changes</button>
-    <hr class="mb-3">
+        {% csrf_token %}
+        {% with form=user_form %}
+            {{ form.email.label }}
+            {{ form.email }}
+
+            {{ form.username.label }}
+            {{ form.username }}
+
+            <button class="btn btn-primary btn-block py-2 mb-4 mt-5 fw-bold w-100" type="submit">Save Changes</button>
+        {% endwith %}
+        <hr class="mb-3">
+    {% endif %}
 </form>
+
 
 {% endblock %}
