@@ -42,6 +42,6 @@ urlpatterns = [
 
     # Favorite List URLs
     path('favorite/', views.FavoriteListView.as_view(), name='favorite'),
-    path('favorite/add-to-favorite/<int:bid>', views.AddToFavoriteView.as_view(), name='add_to_favorite'),
+    path('favorite/add-to-favorite/<int:book_id>', views.AddToFavoriteView.as_view(), name='add_to_favorite'),
 
 ]
