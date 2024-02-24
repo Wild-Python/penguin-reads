@@ -55,7 +55,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    # 3rd-parties middle wares
+    # 3rd-parties middlewares
     "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
@@ -72,9 +72,12 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                
+                # custom context processors
                 'core.apps.library.context_processor.genres',
                 'core.apps.blog.context_processor.category_list',
             ],
+            "builtins": ["core.apps.blog.templatetags.markdown_processing"],
         },
     },
 ]

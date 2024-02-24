@@ -2,534 +2,433 @@
 {% load static %}
 {% block title %}Books{% endblock %}
 {% block content %}
-
     <div class="page-wrapper">
-    
-      <section class="hero">
-        <div class="hero-top-wrap">
-          <div class="w-layout-blockcontainer container w-container">
-            <div class="hero-wrap">
-              <div class="hero-data">
-                <h1 class="hero-title">
-                  Find your next great read at our online book store
-                </h1>
-                <div class="button-wrap">
-                  <a href="{% url 'library:all_books' %}" class="secondary-btn w-inline-block">
-                      <div>Explore Books</div>
-                    <img
-                      src="{% static 'images/white-arrow.svg' %}"
-                      loading="eager"
-                      style="display: block"
-                      alt="Arrow"
-                      class="default-btn-arrow" />
-                      <img
-                      src="{% static 'images/black-arrow.svg' %}"
-                      loading="eager"
-                      style="display: none"
-                      alt="Arrow"
-                      class="hover-btn-arrow"/>
-                  </a>
-                </div>
-              </div>
-                
-              <div class="hero-image-wrapper">
-                <div class="hero-book">
-                  <img src="{% static   'images/hero-books/01.jpg' %}"
-                    alt="Book" class="hero-book-img"/>
-                </div>
-                <div class="hero-book-two">
-                  <img src="{% static 'images/hero-books/02.jpg' %}" alt="Book" class="hero-book-img"/>
-                </div>
-              </div>
-                
-              <div class="triangle"></div>
-            </div>
-          </div>
-        </div>
-        <div class="hero-bottom-wrap">
-          <div class="w-layout-blockcontainer container w-container">
-            <div class="hero-bottom">
-              <div class="hero-category">
-                  
-                <div class="category-btn">
-                  <div class="star-icon">
-                    <img src="{% static 'images/start-icon.svg' %}" loading="lazy" alt="Star"/>
-                  </div>
-                    
-                  <a href="" class="category-tag w-inline-block">
-                      <div>Biography</div>
-                  </a>
-                </div>
-                  
-                <div class="category-btn">
-                  <a href="" class="category-tag w-inline-block">
-                      <div>Novel</div>
-                  </a>
-                  <div class="star-icon">
-                    <img src="{% static 'images/start-icon.svg' %}" alt="Star"/>
-                  </div>
-                  <a href="" class="category-tag w-inline-block">
-                      <div>Self Help</div>
-                  </a>
-                </div>
-                  
-              </div>
-              <div class="hero-review">
-                <div class="review-top">
-                  <div class="button-wrap style-btn">
-                    <a href="" class="primary-btn review w-inline-block">
-                        <div>Reviews</div>
-                    </a>
-                    <div class="review-img-wrap">
-                      <div class="hero-review-img">
-                        <img src="{% static 'images/review-images/01.jpg' %}" loading="lazy" alt="Review Image"/>
-                      </div>
-                      <div class="hero-review-img">
-                        <img src="{% static 'images/review-images/02.jpg' %}" loading="lazy" alt="Review Image"/>
-                      </div>
-                      <div class="hero-review-img">
-                        <img src="{% static 'images/review-images/03.jpg' %}" loading="lazy" alt="Review Image"/>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <p class="hr-text">
-                  Find captivating stories, knowledge, and adventures. From
-                  classics to bestsellers, there&#x27;s something for everyone.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    
-      <section class="categories">
-        <div class="w-layout-blockcontainer container w-container">
-          <div class="section-title">
-            <h2 class="title">Explore Categories</h2>
-          </div>
-            
-          <div class="categories-wrap">
-              
-             <a href="" class="category w-inline-block">
-                  <div class="category-img-wrap zoom-effect">
-                    <img src="{% static 'images/categories/biography.jpg' %}"
-                      class="category-image" alt=""/>
-                  </div>
-                  <div class="category-data">
-                    <h4 class="category-title">Biography</h4>
-                    <div class="button-wrap">
-                      <div class="shop-btn">
-                          <div>View</div>
-                      </div>
-                    </div>
-                  </div>
-             </a>
-              
-              <a href="" class="category w-inline-block">
-                  <div class="category-img-wrap zoom-effect">
-                    <img src="{% static 'images/categories/novel.jpg' %}" alt="Category Image" class="category-image"/>
-                  </div>
-                  <div class="category-data self-help">
-                    <h4 class="category-title">Novel</h4>
-                    <div class="button-wrap">
-                      <div class="shop-btn">
-                          <div>View</div>
-                      </div>
-                    </div>
-                  </div>
-              </a>
-              
-              <a href="" class="category w-inline-block">
-                  <div class="category-img-wrap zoom-effect">
-                    <img src="{% static 'images/categories/self-help.jpg' %}" alt="Category Image" class="category-image"/>
-                  </div>
-                  <div class="category-data novel">
-                    <h4 class="category-title">Self Help</h4>
-                    <div class="button-wrap">
-                      <div class="shop-btn"><div>Shop Now</div></div>
-                    </div>
-                  </div>
-              </a>
-              
-          </div>
-        </div>
-      </section>
-      
-<section class="popular-books">
-  <div class="w-layout-blockcontainer container w-container">
-    <div class="section-title">
-      <div class="sub-heading">Trending</div>
-      <h2 class="title">Popular Books</h2>
-    </div>
-
-    <div class="book-list w-dyn-list">
-      {% for book in books %}
-        <div role="listitem" class="book-item w-dyn-item">
-          <a href="{{ book.slug }}" class="book-link w-inline-block">
-            <div class="book-image">
-              <img src="{{ book.image.url }}" class="book-img zoom-effect" alt="{{ book.title }}"/>
-            </div>
-            <div class="book-data">
-              <h4 class="book-name">{{ book.title }}</h4>
-              <div class="price">
-                ${{ book.price }}USD
-              </div>
-            </div>
-          </a>
-        </div>
-      {% endfor %}
-    </div>
-
-    <div class="right-btn-wrap">
-      <a href="" class="primary-btn w-inline-block">
-        <div>View All</div>
-        <img src="{% static 'images/black-arrow.svg' %}" loading="eager" alt="Arrow" class="default-btn-arrow"/>
-        <img src="{% static 'images/white-arrow.svg' %}" loading="eager" alt="Arrow" class="hover-btn-arrow"/>
-      </a>
-    </div>
-  </div>
-</section>
-
-        
-        
-      <section class="features">
-        <div class="w-layout-blockcontainer container w-container">
-          <div class="features-wrap">
-            <div class="feature">
-              <div class="feature-text">
-                <h3 class="feature-title">Free Shipping for Book Lovers</h3>
-                <div class="feature-info">Explore &amp; Shop Books Now</div>
-              </div>
-              <div class="feature-image">
-                <img
-                  src="https://assets-global.website-files.com/6491518bb88c5c4729ea8883/64b68f1aad558e5a92f04fa8_feature-03.svg"
-                  loading="lazy"
-                  alt="Feature Image"
-                  class="feature-img"
-                />
-              </div>
-            </div>
-            <div class="feature pink">
-              <div class="feature-text">
-                <h3 class="feature-title">Return with Confidence</h3>
-                <div class="feature-info">Within 20 Days Return</div>
-              </div>
-              <div class="feature-image">
-                <img
-                  src="https://assets-global.website-files.com/6491518bb88c5c4729ea8883/64b68f1aab9f91725bcd44f5_feature-02.svg"
-                  loading="lazy"
-                  alt="Feature Image"
-                  class="feature-img"
-                />
-              </div>
-            </div>
-            <div class="feature yellow">
-              <div class="feature-text">
-                <h3 class="feature-title">Efficient Book Delivery</h3>
-                <div class="feature-info">Fast &amp; Efficient Service</div>
-              </div>
-              <div class="feature-image">
-                <img
-                  src="https://assets-global.website-files.com/6491518bb88c5c4729ea8883/64b68f1a80e13bcde5bbc55c_feature-01.svg"
-                  loading="lazy"
-                  alt="Feature Image"
-                  class="feature-img"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-        
-        
-<section class="new-arrival-book">
-  <div class="w-layout-blockcontainer container w-container">
-    <div class="section-title">
-      <div class="sub-heading">Latest Collection</div>
-      <h2 class="title">New Arrival Books</h2>
-    </div>
-
-    <div class="w-dyn-list">
-      <div role="list" class="book-list w-dyn-items">
-        {% for book in books %}
-          <div role="listitem" class="book-item w-dyn-item">
-            <a href="{{ book.slug }}" class="book-link w-inline-block">
-              <div class="book-image">
-                <img src="{{ book.image.url }}" class="book-img" alt="{{ book.title }}"/>
-              </div>
-              <div class="book-data">
-                <h4 class="book-name">{{ book.title }}</h4>
-                <div class="price">
-                  $ {{ book.price }} USD
-                </div>
-              </div>
-            </a>
-          </div>
-        {% endfor %}
-      </div>
-    </div>
-
-    <div class="right-btn-wrap">
-      <a href="" class="primary-btn w-inline-block">
-        <div>View All Books</div>
-        <img
-          src="{% static 'images/black-arrow.svg' %}"
-          loading="eager"
-          alt="Arrow"
-          class="default-btn-arrow"/>
-        <img
-          src="{% static 'images/white-arrow.svg' %}"
-          loading="eager"
-          alt="Arrow"
-          class="hover-btn-arrow"
-        />
-      </a>
-    </div>
-  </div>
-</section>
-
-    
-    
-      <section class="featured-book">
-        <div class="w-layout-blockcontainer container w-container">
-          <div class="section-title">
-            <h2 class="title">Featured Book of the Week</h2>
-          </div>
-          <div class="fb-book-wrap">
-            <div class="featured-book-wrap">
-              <div class="collection-list-wrapper w-dyn-list">
-                <div role="list" class="fb-book-list w-dyn-items">
-                  <div role="listitem" class="fb-book-list w-dyn-item">
-                    <a
-                      href=""
-                      class="fb-big-link w-inline-block"
-                      ><div class="fb-big-book">
-                        <img
-                          src="https://assets-global.website-files.com/64b787e06a1ea8dedc36b707/64ba63853e598ba215b87048_book-main-19.jpg"
-                          alt="Book"
-                          class="fb-book-img"
-                        />
-                      </div>
-                      <div class="fb-book-details">
-                        <div class="fb-book-data">
-                          <h3 class="fb-book-title">
-                            The Almanack Of Naval Ravikant
-                          </h3>
-                          <p>
-                            Getting rich is not just about luck; happiness is
-                            not just a trait we are born with.These aspirations
-                            may seem out of reach, but building wealth and being
-                            happy are skills we can learn.
-                          </p>
-                          <p class="single-text">
-                            So what are these skills, and how do we learn them?
-                            What are the principles that should guide our
-                            efforts?
-                          </p>
-                        </div>
-                        <div class="book-info-wrap">
-                          <div class="book-info">
-                            <h6 class="fb-book-author">Eric Jorgenson</h6>
-                            <div>
-                              $10.36USD
+        <section class="hero">
+            <div class="hero-top-wrap">
+                <div class="w-layout-blockcontainer container w-container">
+                    <div class="hero-wrap">
+                        <div class="hero-data">
+                            <h1 class="hero-title">Find your next great read at our online book store</h1>
+                            <div class="button-wrap">
+                                <a href="{% url 'library:all_books' %}"
+                                   class="secondary-btn w-inline-block">
+                                    <div>Explore Books</div>
+                                    <img src="{% static 'images/white-arrow.svg' %}"
+                                         loading="eager"
+                                         style="display: block"
+                                         alt="Arrow"
+                                         class="default-btn-arrow" />
+                                    <img src="{% static 'images/black-arrow.svg' %}"
+                                         loading="eager"
+                                         style="display: none"
+                                         alt="Arrow"
+                                         class="hover-btn-arrow" />
+                                </a>
                             </div>
-                          </div>
-                          <div class="shop-btn-wrap">
-                            <div class="primary-btn fb-button">
-                              <div>Shop Now</div>
-                            </div>
-                          </div>
                         </div>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-              
-            {### FEATURED BOOKS ###}
-
-            <div class="fb-small-wrap">
-              <div class="w-dyn-list">
-                <div role="list" class="fb-small-list w-dyn-items">
-                  <div role="listitem" class="fb-small-item w-dyn-item">
-                    <a href="" class="fb-small-link w-inline-block">
-                        <div class="fb-small-image">
-                        <img alt="" loading="lazy" src="https://assets-global.website-files.com/64b787e06a1ea8dedc36b707/64ba5abe5edf60c6b4ec5e3e_book-main-13.jpg" class="fb-small-img"/>
-                      </div>
-                      <div class="sb-info">
-                        <h3 class="fb-small-title">The Psychology of Money</h3>
-                        <div>
-                          $6.40USD
-                        </div>
-                      </div>
-                    </a>
-                    <div class="divider"></div>
-                  </div>
-                  <div role="listitem" class="fb-small-item w-dyn-item">
-                    <a href="" class="fb-small-link w-inline-block">
-                          <div class="fb-small-image">
-                            <img alt="" src="https://assets-global.website-files.com/64b787e06a1ea8dedc36b707/64ba5ad74a0de66a338dc3d2_book-main-01.jpg" class="fb-small-img"/>
-                          </div>
-                          <div class="sb-info">
-                            <h3 class="fb-small-title">12 Rules for Life</h3>
-                            <div>
-                              $9.74USD
+                        <div class="hero-image-wrapper">
+                            <div class="hero-book">
+                                <img src="{% static   'images/hero-books/01.jpg' %}"
+                                     alt="Book"
+                                     class="hero-book-img" />
                             </div>
-                          </div>
+                            <div class="hero-book-two">
+                                <img src="{% static 'images/hero-books/02.jpg' %}"
+                                     alt="Book"
+                                     class="hero-book-img" />
+                            </div>
+                        </div>
+                        <div class="triangle"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-bottom-wrap">
+                <div class="w-layout-blockcontainer container w-container">
+                    <div class="hero-bottom">
+                        <div class="hero-category">
+                            <div class="category-btn">
+                                <div class="star-icon">
+                                    <img src="{% static 'images/start-icon.svg' %}" loading="lazy" alt="Star" />
+                                </div>
+                                <a href="" class="category-tag w-inline-block">
+                                    <div>Biography</div>
+                                </a>
+                            </div>
+                            <div class="category-btn">
+                                <a href="" class="category-tag w-inline-block">
+                                    <div>Novel</div>
+                                </a>
+                                <div class="star-icon">
+                                    <img src="{% static 'images/start-icon.svg' %}" alt="Star" />
+                                </div>
+                                <a href="" class="category-tag w-inline-block">
+                                    <div>Self Help</div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="hero-review">
+                            <div class="review-top">
+                                <div class="button-wrap style-btn">
+                                    <a href="" class="primary-btn review w-inline-block">
+                                        <div>Reviews</div>
+                                    </a>
+                                    <div class="review-img-wrap">
+                                        <div class="hero-review-img">
+                                            <img src="{% static 'images/review-images/01.jpg' %}"
+                                                 loading="lazy"
+                                                 alt="Review Image" />
+                                        </div>
+                                        <div class="hero-review-img">
+                                            <img src="{% static 'images/review-images/02.jpg' %}"
+                                                 loading="lazy"
+                                                 alt="Review Image" />
+                                        </div>
+                                        <div class="hero-review-img">
+                                            <img src="{% static 'images/review-images/03.jpg' %}"
+                                                 loading="lazy"
+                                                 alt="Review Image" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="hr-text">
+                                Find captivating stories, knowledge, and adventures. From
+                                classics to bestsellers, there&#x27;s something for everyone.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+{#              <section class="categories">#}
+{#                <div class="w-layout-blockcontainer container w-container">#}
+{#                  <div class="section-title">#}
+{#                    <h2 class="title">Explore Categories</h2>#}
+{#                  </div>#}
+{##}
+{#                  <div class="categories-wrap">#}
+{##}
+{#                     <a href="" class="category w-inline-block">#}
+{#                          <div class="category-img-wrap zoom-effect">#}
+{#                            <img src="{% static 'images/categories/biography.jpg' %}"#}
+{#                              class="category-image" alt=""/>#}
+{#                          </div>#}
+{#                          <div class="category-data">#}
+{#                            <h4 class="category-title">Biography</h4>#}
+{#                            <div class="button-wrap">#}
+{#                              <div class="shop-btn">#}
+{#                                  <div>View</div>#}
+{#                              </div>#}
+{#                            </div>#}
+{#                          </div>#}
+{#                     </a>#}
+{##}
+{#                      <a href="" class="category w-inline-block">#}
+{#                          <div class="category-img-wrap zoom-effect">#}
+{#                            <img src="{% static 'images/categories/novel.jpg' %}"#}
+{#                         alt="Category Image"#}
+{#                         class="category-image"/>#}
+{#                          </div>#}
+{#                          <div class="category-data self-help">#}
+{#                            <h4 class="category-title">Novel</h4>#}
+{#                            <div class="button-wrap">#}
+{#                              <div class="shop-btn">#}
+{#                                  <div>View</div>#}
+{#                              </div>#}
+{#                            </div>#}
+{#                          </div>#}
+{#                      </a>#}
+{##}
+{#                      <a href="" class="category w-inline-block">#}
+{#                          <div class="category-img-wrap zoom-effect">#}
+{#                            <img src="{% static 'images/categories/self-help.jpg' %}"#}
+{#                         alt="Category Image"#}
+{#                         class="category-image"/>#}
+{#                          </div>#}
+{#                          <div class="category-data novel">#}
+{#                            <h4 class="category-title">Self Help</h4>#}
+{#                            <div class="button-wrap">#}
+{#                              <div class="shop-btn"><div>Shop Now</div></div>#}
+{#                            </div>#}
+{#                          </div>#}
+{#                      </a>#}
+{##}
+{#                  </div>#}
+{#                </div>#}
+{#              </section>#}
+        <section class="popular-books">
+            <div class="w-layout-blockcontainer container w-container">
+                <div class="section-title">
+                    <div class="sub-heading">Trending</div>
+                    <h2 class="title">Popular Books</h2>
+                </div>
+                <div class="book-list w-dyn-list">
+                    {% for book in books %}
+                        <div role="listitem" class="book-item w-dyn-item">
+                            <a href="{{ book.slug }}" class="book-link w-inline-block">
+                                <div class="book-image">
+                                    <img src="{{ book.image.url }}"
+                                         class="book-img zoom-effect"
+                                         alt="{{ book.title }}" />
+                                </div>
+                                <div class="book-data">
+                                    <h4 class="book-name">{{ book.title }}</h4>
+                                    <div class="price">${{ book.price }}USD</div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="right-btn-wrap">
+                    <a href="" class="primary-btn w-inline-block">
+                        <div>View All</div>
+                        <img src="{% static 'images/black-arrow.svg' %}"
+                             loading="eager"
+                             alt="Arrow"
+                             class="default-btn-arrow" />
+                        <img src="{% static 'images/white-arrow.svg' %}"
+                             loading="eager"
+                             alt="Arrow"
+                             class="hover-btn-arrow" />
                     </a>
-                    <div class="divider"></div>
-                  </div>
                 </div>
-              </div>
             </div>
-          </div>
-        </div>
+        </section>
+        <section class="featured-book">
+            <div class="w-layout-blockcontainer container w-container">
+                <div class="section-title">
+                    <h2 class="title">Featured Book of the Week</h2>
+                </div>
+                <div class="fb-book-wrap">
+                    <div class="featured-book-wrap">
+                        <div class="collection-list-wrapper w-dyn-list">
+                            <div role="list" class="fb-book-list w-dyn-items">
+                                <div role="listitem" class="fb-book-list w-dyn-item">
+                                    <a href="" class="fb-big-link w-inline-block">
+                                        <div class="fb-big-book">
+                                            <img src="https://assets-global.website-files.com/64b787e06a1ea8dedc36b707/64ba63853e598ba215b87048_book-main-19.jpg"
+                                                 alt="Book"
+                                                 class="fb-book-img" />
+                                        </div>
+                                        <div class="fb-book-details">
+                                            <div class="fb-book-data">
+                                                <h3 class="fb-book-title">The Almanack Of Naval Ravikant</h3>
+                                                <p>
+                                                    Getting rich is not just about luck; happiness is
+                                                    not just a trait we are born with.These aspirations
+                                                    may seem out of reach, but building wealth and being
+                                                    happy are skills we can learn.
+                                                </p>
+                                                <p class="single-text">
+                                                    So what are these skills, and how do we learn them?
+                                                    What are the principles that should guide our
+                                                    efforts?
+                                                </p>
+                                            </div>
+                                            <div class="book-info-wrap">
+                                                <div class="book-info">
+                                                    <h6 class="fb-book-author">Eric Jorgenson</h6>
+                                                    <div>$10.36USD</div>
+                                                </div>
+                                                <div class="shop-btn-wrap">
+                                                    <div class="primary-btn fb-button">
+                                                        <div>Shop Now</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {### FEATURED BOOKS ###}
+                    <div class="fb-small-wrap">
+                        <div class="w-dyn-list">
+                            <div role="list" class="fb-small-list w-dyn-items">
+                                <div role="listitem" class="fb-small-item w-dyn-item">
+                                    <a href="" class="fb-small-link w-inline-block">
+                                        <div class="fb-small-image">
+                                            <img alt=""
+                                                 loading="lazy"
+                                                 src="https://assets-global.website-files.com/64b787e06a1ea8dedc36b707/64ba5abe5edf60c6b4ec5e3e_book-main-13.jpg"
+                                                 class="fb-small-img" />
+                                        </div>
+                                        <div class="sb-info">
+                                            <h3 class="fb-small-title">The Psychology of Money</h3>
+                                            <div>$6.40USD</div>
+                                        </div>
+                                    </a>
+                                    <div class="divider"></div>
+                                </div>
+                                <div role="listitem" class="fb-small-item w-dyn-item">
+                                    <a href="" class="fb-small-link w-inline-block">
+                                        <div class="fb-small-image">
+                                            <img alt=""
+                                                 src="https://assets-global.website-files.com/64b787e06a1ea8dedc36b707/64ba5ad74a0de66a338dc3d2_book-main-01.jpg"
+                                                 class="fb-small-img" />
+                                        </div>
+                                        <div class="sb-info">
+                                            <h3 class="fb-small-title">12 Rules for Life</h3>
+                                            <div>$9.74USD</div>
+                                        </div>
+                                    </a>
+                                    <div class="divider"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     
-      </section>
+        <!-- Blog Section -->
+        <section class="blog">
+            <div class="w-layout-blockcontainer container w-container">
+                <div class="section-title">
+                    <div class="sub-heading">Blogs</div>
+                    <h2 class="title">Latest News &amp; Resources</h2>
+                </div>
+                <div class="blog-wrap">
+                    <div class="blog-collection w-dyn-list">
+                        <div role="list" class="blog-list w-dyn-items">
+                            <div role="listitem" class="featured-blog w-dyn-item">
+                                <a href="" class="featured-blog-link w-inline-block">
+                                    <div class="fb-blog-image blog-image">
+                                        <img src="https://assets-global.website-files.com/64b787e06a1ea8dedc36b707/64b78f800dc24320783bd41c_blog-thumb-07.jpg"
+                                             loading="lazy"
+                                             alt="Blog Thumb"
+                                             class="featured-blog-img" />
+                                    </div>
+                                    <div class="fb-blog-data">
+                                        <div class="blog-date">July 25, 2023</div>
+                                        <h3 class="blog-title">A Journey into the Enchanting Depths of Books</h3>
+                                        <p class="blog-info">
+                                            Our collection of books is a valuable resource for
+                                            nurturing your artistic growth and expanding your
+                                            creative horizons.
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blog-collection w-dyn-list">
+                        <div role="list" class="blog-list w-dyn-items">
+                            <div role="listitem" class="small-blog w-dyn-item">
+                                <a href="" class="small-blog-link w-inline-block">
+                                    <div class="sb-blog-image blog-image">
+                                        <img alt=""
+                                             loading="lazy"
+                                             src="https://assets-global.website-files.com/64b787e06a1ea8dedc36b707/64b78c7c42421ae3cbc7433f_blog-thumb-01.jpg"
+                                             class="small-blog-img" />
+                                    </div>
+                                    <div class="small-blog-data">
+                                        <div class="blog-date">July 20, 2023</div>
+                                        <h3 class="small-blog-title">Embracing Your Inner Strength and Achieving Greatness</h3>
+                                        <p class="small-blog-info">
+                                            Embracing your inner strength empowers you to face
+                                            challenges head-on, build resilience, and live a
+                                            fulfilling and meaningful life.
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div role="listitem" class="small-blog w-dyn-item">
+                                <a data-w-id="d89ac8d8-4ca0-7b38-5fbb-309ae49741da"
+                                   href=""
+                                   class="small-blog-link w-inline-block">
+                                    <div class="sb-blog-image blog-image">
+                                        <img alt=""
+                                             loading="lazy"
+                                             src="https://assets-global.website-files.com/64b787e06a1ea8dedc36b707/64b78c9a6a1ea8dedc3dde42_blog-thumb-02.jpg"
+                                             class="small-blog-img" />
+                                    </div>
+                                    <div class="small-blog-data">
+                                        <div class="blog-date">July 20, 2023</div>
+                                        <h3 class="small-blog-title">
+                                            Books to Inspire, Motivate, and Unleash Your Inner
+                                            Artist
+                                        </h3>
+                                        <p class="small-blog-info">
+                                            our collection of books is a valuable resource for
+                                            nurturing your artistic growth and expanding your
+                                            creative horizons.
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="right-btn-wrap">
+                    <a href="{% url 'blog:home' %}" class="primary-btn w-inline-block">
+                        <div>View All</div>
+                        <img src="{% static 'images/black-arrow.svg' %}"
+                             loading="eager"
+                             alt="Arrow"
+                             class="default-btn-arrow" />
+                        <img src="{% static 'images/white-arrow.svg' %}"
+                             loading="eager"
+                             alt="Arrow"
+                             class="hover-btn-arrow" />
+                    </a>
+                </div>
+            </div>
+        </section>
     
-      <section class="blog">
-        <div class="w-layout-blockcontainer container w-container">
-          <div class="section-title">
-            <div class="sub-heading">Blogs</div>
-            <h2 class="title">Latest News &amp; Resources</h2>
-          </div>
-          <div class="blog-wrap">
-            <div class="blog-collection w-dyn-list">
-              <div role="list" class="blog-list w-dyn-items">
-                <div role="listitem" class="featured-blog w-dyn-item">
-                  <a href="" class="featured-blog-link w-inline-block">
-                      <div class="fb-blog-image blog-image">
-                      <img src="https://assets-global.website-files.com/64b787e06a1ea8dedc36b707/64b78f800dc24320783bd41c_blog-thumb-07.jpg" loading="lazy" alt="Blog Thumb" class="featured-blog-img"/>
+        <section class="cta">
+            <div class="w-layout-blockcontainer container w-container">
+                <div class="cta-wrap">
+                    <h2 class="cta-title">Start Your Reading Journey Now!</h2>
+                    <div class="cta-data">
+                        <p class="cta-text">
+                            Subscribe for Readster&#x27;s latest news, updates, and curated
+                            content
+                        </p>
+                        <div class="email-form w-form">
+                            <form id="email-form"
+                                  name="email-form"
+                                  data-name="Email Form"
+                                  method="get"
+                                  data-wf-page-id="6491518bb88c5c4729ea8887"
+                                  data-wf-element-id="a638bce4-bc8a-bc71-d317-8ad92718547c">
+                                <div class="email-field">
+                                    <input type="email"
+                                           class="email-input w-input"
+                                           maxlength="256"
+                                           name="Email"
+                                           data-name="Email"
+                                           placeholder="Your email address"
+                                           id="Email-2"
+                                           required="" />
+                                    <input type="submit"
+                                           value="Subscribe"
+                                           data-wait="Please wait..."
+                                           class="subscribe-btn w-button" />
+                                </div>
+                            </form>
+                            <div class="success-message w-form-done">
+                                <div>Thank you! Your submission has been received!</div>
+                            </div>
+                            <div class="error-message w-form-fail">
+                                <div>Oops! Something went wrong while submitting the form.</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="fb-blog-data">
-                      <div class="blog-date">July 25, 2023</div>
-                      <h3 class="blog-title">
-                        A Journey into the Enchanting Depths of Books
-                      </h3>
-                      <p class="blog-info">
-                        Our collection of books is a valuable resource for
-                        nurturing your artistic growth and expanding your
-                        creative horizons.
-                      </p>
+                    <div class="cta-graphic">
+                        <img src="{% static 'images/CTA Image.svg' %}"
+                             loading="lazy"
+                             alt="CTA Image" />
                     </div>
-                  </a>
                 </div>
-              </div>
+                <div class="cta-graphic-two">
+                    <img src="{% static 'images/CTA Graphic.svg' %}"
+                         loading="lazy"
+                         alt="CTA Graphic" />
+                </div>
             </div>
-            <div class="blog-collection w-dyn-list">
-              <div role="list" class="blog-list w-dyn-items">
-                <div role="listitem" class="small-blog w-dyn-item">
-                  <a href="" class="small-blog-link w-inline-block">
-                      <div class="sb-blog-image blog-image">
-                      <img
-                        alt=""
-                        loading="lazy"
-                        src="https://assets-global.website-files.com/64b787e06a1ea8dedc36b707/64b78c7c42421ae3cbc7433f_blog-thumb-01.jpg"
-                        class="small-blog-img"
-                      />
-                    </div>
-                    <div class="small-blog-data">
-                      <div class="blog-date">July 20, 2023</div>
-                      <h3 class="small-blog-title">
-                        Embracing Your Inner Strength and Achieving Greatness
-                      </h3>
-                      <p class="small-blog-info">
-                        Embracing your inner strength empowers you to face
-                        challenges head-on, build resilience, and live a
-                        fulfilling and meaningful life.
-                      </p>
-                    </div></a
-                  >
-                </div>
-                <div role="listitem" class="small-blog w-dyn-item">
-                  <a
-                    data-w-id="d89ac8d8-4ca0-7b38-5fbb-309ae49741da"
-                    href=""
-                    class="small-blog-link w-inline-block"
-                    ><div class="sb-blog-image blog-image">
-                      <img
-                        alt=""
-                        loading="lazy"
-                        src="https://assets-global.website-files.com/64b787e06a1ea8dedc36b707/64b78c9a6a1ea8dedc3dde42_blog-thumb-02.jpg"
-                        
-                        class="small-blog-img"
-                      />
-                    </div>
-                    <div class="small-blog-data">
-                      <div class="blog-date">July 20, 2023</div>
-                      <h3 class="small-blog-title">
-                        Books to Inspire, Motivate, and Unleash Your Inner
-                        Artist
-                      </h3>
-                      <p class="small-blog-info">
-                        our collection of books is a valuable resource for
-                        nurturing your artistic growth and expanding your
-                        creative horizons.
-                      </p>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="right-btn-wrap">
-            <a href="" class="primary-btn w-inline-block">
-              <div>View All</div>
-              <img src="{% static 'images/black-arrow.svg' %}" loading="eager" alt="Arrow" class="default-btn-arrow" />
-              <img src="{% static 'images/white-arrow.svg' %}" loading="eager" alt="Arrow" class="hover-btn-arrow"/>
-            </a>
-          </div>
-        </div>
-      </section>
-    
-      <section class="cta">
-        <div class="w-layout-blockcontainer container w-container">
-          <div class="cta-wrap">
-            <h2 class="cta-title">Start Your Reading Journey Now!</h2>
-            <div class="cta-data">
-              <p class="cta-text">
-                Subscribe for Readster&#x27;s latest news, updates, and curated
-                content
-              </p>
-              <div class="email-form w-form">
-                <form
-                  id="email-form"
-                  name="email-form"
-                  data-name="Email Form"
-                  method="get"
-                  data-wf-page-id="6491518bb88c5c4729ea8887"
-                  data-wf-element-id="a638bce4-bc8a-bc71-d317-8ad92718547c"
-                >
-                  <div class="email-field">
-                    <input type="email" class="email-input w-input" maxlength="256"
-                      name="Email" data-name="Email"
-                      placeholder="Your email address" id="Email-2" required=""/>
-                    <input type="submit" value="Subscribe" data-wait="Please wait..." class="subscribe-btn w-button"/>
-                  </div>
-                </form>
-                <div class="success-message w-form-done">
-                  <div>Thank you! Your submission has been received!</div>
-                </div>
-                <div class="error-message w-form-fail">
-                  <div>
-                    Oops! Something went wrong while submitting the form.
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="cta-graphic">
-              <img src="{% static 'images/CTA Image.svg' %}" loading="lazy" alt="CTA Image"/>
-            </div>
-          </div>
-          <div class="cta-graphic-two">
-            <img src="{% static 'images/CTA Graphic.svg' %}" loading="lazy" alt="CTA Graphic"/>
-          </div>
-        </div>
-      </section>
+        </section>
     </div>
-
     {% comment %} footer goes here {% endcomment %}
-    
 {% endblock %}

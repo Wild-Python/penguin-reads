@@ -50,10 +50,10 @@ class UserSignupForm(UserCreationForm, EmailMixin):
         fields = ('username', 'email',)
         widgets = {
             'username': forms.TextInput(
-                attrs={'class': 'form-control mb-3', 'placeholder': 'Username'}
+                attrs={'class': '', 'placeholder': 'Username'}
             ),
             'email': forms.EmailInput(
-                attrs={'class': 'form-control mb-3', 'placeholder': 'E-mail', 'name': 'email', 'id': 'id_email'}
+                attrs={'class': '', 'placeholder': 'E-mail', 'name': 'email', 'id': 'id_email'}
             ),
         }
 

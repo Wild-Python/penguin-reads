@@ -2,78 +2,56 @@
 {% block title %}Signup{% endblock %}
 {% block content %}
 
-<style>
-    .account-form input {
-        border: 2px solid #ccc;
-        height: calc(2em + .75rem + 2px);
-    }
-
-    .account-form input:focus {
-        border-color: #1497ff;
-        box-shadow: none;
-    }
-</style>
-
-<div class="container-fluid">
-    <div class="row no-gutter">
-        <div class="col-md-12">
-            <div class="login d-flex align-items-center py-1">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12 col-lg-7  mx-auto">
-                             <form class="account-form p-4 rounded col-lg-10 mx-auto" action="." method="post">
-                                {% csrf_token %}
-                                <h3 class="mb-2 font-weight-bold">Create an account</h3>
-                                <p class="mb-4">It's free and only takes a minute.</p>
-
-                                {% if form.errors %}
-                                <p>Please correct the following errors:</p>
-                                {% for field in form %}
-                                {% if field.errors %}
-                                <div class="alert alert-primary" role="alert">
-                                    {{ field.label }}: {{ field.errors|striptags }}
-                                </div>
-                                {% endif %}
-                                {% endfor %}
-                                {% endif %}
-
-                                <label>
-                                    {{ form.username.label }}
-                                    <span class="text-muted small">(Required)</span>
-                                </label>
-                                {{ form.username }}
-
-                                <label>
-                                    {{ form.email.label}}
-                                    <span class="text-muted small">(Required)</span>
-                                </label>
-                                {{ form.email }}
-
-                                <label>
-                                    {{ form.password1.label}}
-                                    <span class="text-muted mb-4"></span>
-                                </label>
-                                 <small class="form-text text-muted mb-4 small">
-                                    At least 8 characters and 1 digit
-                                </small>
-                                {{ form.password1 }}
-
-                                <label>
-                                    {{ form.password2.label}}
-                                    <span class="text-muted small">(Required)</span>
-                                </label>
-                                {{ form.password2 }}
-
-                                <button class="btn btn-primary btn-block py-2 mb-4 mt-5 fw500 w-100" type="submit">Register</button>
-                                <p class="text-center">
-                                    <a href="{% url "users:login" %}">Already have an account?</a>
-                                </p>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+    
+    <form action="." method="post" class="h-screen justify-center w-screen mx-auto flex flex-col gap-y-1 lg:w-1/2 w-8/12 px-4">
+    {% csrf_token %}
+      <h1 class="text-2xl font-bold">Create an account</h1>
+      <p class="text-sm fon-medium pb-2">It's free and only takes a minute.</p>
+        
+{#         {% if form.errors %}#}
+{#        <p>Please correct the following errors:</p>#}
+{#        {% for field in form %}#}
+{#        {% if field.errors %}#}
+{#        <div class="alert alert-primary" role="alert">#}
+{#            {{ field.label }}: {{ field.errors|striptags }}#}
+{#        </div>#}
+{#        {% endif %}#}
+{#        {% endfor %}#}
+{#        {% endif %}#}
+{#        #}
+        
+      <label class="block pt-3 font-semibold mb-1 text-opacity-75" for="username">
+          {{ form.username.label }}
+        <span class="text-gray-400 font-normal">(Required)</span>
+      </label>
+        {{ form.username }}
+        
+      <label class="block text-sm pt-3 font-semibold mb-1 text-opacity-75" for="Email">
+          {{ form.email.label }}
+        <span class="text-gray-400 font-normal">(Required)</span>
+      </label>
+            {{ form.email }}
+        
+      <label for="password"> {{ form.password1.label}} </label>
+      <p class="text-sm fon-medium pb-2 text-gray-500">
+        At least 8 characters and 1 digit
+      </p>
+        {{ form.password1 }}
+        
+      <label for="password"> {{ form.password2.label}} </label>
+        {{ form.password2 }}
+      
+          <!-- ya div extra ha gap ka lia -->
+          <div class="h-4"></div>
+          <button type="submit" class="relative group transition-all duration-500 scale-100 ease-in focus:scale-95 border-[3px] border-white rounded-full flex items-center justify-center text-white gap-2 gap-x-4 font-bold outline-none text-xl p-2 bg-black hover:bg-purple-950 active:bg-purple-400">
+            Register
+            <svg fill="currentColor" viewBox="0 0 24 24" class="w-8 h-8 transition-transform duration-300 group-hover:transform group-hover:translate-x-10 group-hover:animate-spin">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z"></path>
+            </svg>
+          </button>
+          <button class="underline text-sm pt-2 text-gray-600">
+            <a href="{% url "users:login" %}">Already have an account?</a>
+          </button>
+    </form>
+    
 {% endblock %}
