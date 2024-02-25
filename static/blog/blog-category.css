@@ -1,0 +1,133 @@
+body {
+    font-family: poppins;
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+#blog {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.blog-heading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.blog-heading span {
+    color: #f33c3c;
+}
+
+.blog-heading h3 {
+    font-size: 2.4rem;
+    color: #2b2b2b;
+    font-weight: 600;
+}
+
+.blog-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.blog-box {
+    width: 100%;
+    max-width: 350px;
+    max-height: 500px;
+
+    background-color: #faf9f6;
+    border: 1px solid #2b2b2b;
+    margin: 20px 20px;
+}
+
+
+.blog-img {
+    width: 100%;
+    height: 200px;
+    /*border-bottom: 1px solid #0f0f0f;*/
+}
+
+.blog-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.blog-text {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.blog-text span {
+
+    font-size: 0.9rem;
+}
+
+.blog-text .date {
+    color: #0f0f0f;
+}
+
+.blog-text .blog-title {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: #272727;
+}
+
+.blog-text p {
+    color: #9b9b9b;
+    font-size: 0.9rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 10px 0; /* Adjusted margin */
+}
+
+.blog-text a {
+    color: #0f0f0f;
+}
+
+.blog-text a:hover {
+    color: #c74242;
+    transition: all ease 0.3s;
+}
+
+@media (max-width: 1250px) {
+    .blog-box {
+        max-width: 300px; /* Adjusted max-width */
+    }
+}
+
+@media (max-width: 1100px) {
+    .blog-box {
+        width: 70%;
+    }
+}
+
+@media (max-width: 550px) {
+    .blog-box {
+        margin: 20px 10px;
+        width: 100%;
+    }
+    #blog {
+        padding: 20px;
+    }
+}
